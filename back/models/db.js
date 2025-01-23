@@ -15,7 +15,9 @@ db.serialize(() => {
         idUtilisateur INTEGER PRIMARY KEY AUTOINCREMENT,
         nom TEXT NOT NULL,
         prenom TEXT NOT NULL,
-        score INTEGER NULL
+        score INTEGER NULL,
+        email TEXT UNIQUE NOT NULL,
+        mot_de_passe TEXT NOT NULL
     )`);
 
     // Table Quiz
@@ -41,13 +43,8 @@ db.serialize(() => {
         FOREIGN KEY (quiz_id) REFERENCES Quiz(idQuiz) ON DELETE CASCADE
     )`);
 
-    console.log('Tables Utilisateur, Quiz et Question créées avec succès');
+    //console.log('Tables Utilisateur, Quiz et Question créées avec succès');
 });
 
-db.close((err) => {
-    if (err) {
-        console.error('Erreur lors de la fermeture de la BDD', err.message);
-    } else {
-        console.log('Base de données fermée correctement');
-    }
-});
+
+module.exports = db;
